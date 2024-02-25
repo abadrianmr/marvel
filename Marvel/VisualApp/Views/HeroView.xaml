@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="VisualApp.Views.HeroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VisualApp.Views"
+             xmlns:ui="http://schemas.modernwpf.com/2019" 
+             xmlns:navigation="clr-namespace:VisualApp.ViewModels.Navigation" 
+             d:DataContext="{d:DesignInstance Type=navigation:HeroViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="ComboBoxHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyTextBlockStyle}">
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+    </UserControl.Resources>
+    <TabControl
+        Style="{StaticResource TabControlPivotStyle}"
+        MinHeight="400">
+        <TabItem Header="Profile">
+            <ui:SimpleStackPanel
+            Margin="24,0,24,20"
+            Width="404"
+            HorizontalAlignment="Left"
+            Spacing="0">
+                <TextBlock
+                Text="{Binding Name}"
+                Style="{StaticResource TitleTextBlockStyle}"
+                FontSize="28"
+                Margin="0,8,0,12" />
+                <ui:PersonPicture
+                        x:Name="personPicture"
+                        Height="300"
+                        VerticalAlignment="Top"
+                        ProfilePicture="{Binding Image.Url}"/>
+                <GroupBox Header="Power Stats">
+                    <StackPanel>
+                        <TextBlock
+                        Text="Strength:"
+                        Style="{StaticResource ComboBoxHeaderStyle}" />
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Strength}"/>
+
+                        <TextBlock
+                        Text="Intelligence:"
+                        Style="{StaticResource ComboBoxHeaderStyle}" />
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Intelligence}"/>
+
+                        <TextBlock
+                        Text="Speed:"
+                        Style="{StaticResource ComboBoxHeaderStyle}" />
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Speed}"/>
+
+                        <TextBlock
+                        Text="Durability:"
+                        Style="{StaticResource ComboBoxHeaderStyle}" />
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Durability}"/>
+
+                        <TextBlock
+                        Text="Combat:"
+                        Style="{StaticResource ComboBoxHeaderStyle}" />
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Power}"/>
+
+                        <TextBlock
+                        Text="Combat:"
+                        Style="{StaticResource ComboBoxHeaderStyle}" />
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Combat}"/>
+                    </StackPanel>
+                </GroupBox>
+            </ui:SimpleStackPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>

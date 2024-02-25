@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Prism.DryIoc;
+using Prism.Ioc;
 using System.Windows;
+using VisualApp.Views;
 
 namespace VisualApp
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
+        protected override Window CreateShell()
+        {
+            return Container.Resolve<MainWindow>();
+        }
+
+        protected override void RegisterTypes( IContainerRegistry containerRegistry )
+        {
+            containerRegistry.Register<Services.IHeroService, Services.HeroService>();
+        }
+
+        protected override void OnExit( ExitEventArgs e )
+        {
+            base.OnExit( e );
+            System.Windows.Forms.Application.Restart();
+        }
     }
 }

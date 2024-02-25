@@ -1,0 +1,88 @@
+﻿<Window x:Class="VisualApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        xmlns:local="clr-namespace:VisualApp.Views" 
+        xmlns:viewmodels="clr-namespace:VisualApp.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        mc:Ignorable="d"
+        Title="Heroes" Height="450" Width="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <tb:TaskbarIcon x:Name="myNotifyIcon"
+                    Visibility="Visible"
+                    ToolTipText="Heroes App"
+                    IconSource="{StaticResource AppIcon}"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <DockPanel 
+                Grid.Row="1"
+                Background="{DynamicResource NavigationViewExpandedPaneBackground}">
+                <ui:AutoSuggestBox
+                    DockPanel.Dock="Top"
+                    Margin="12"
+                    PlaceholderText="Search"                     
+                    ItemsSource="{Binding SearchSugestions}"
+                    Text="{Binding SearchText, Mode=TwoWay}"
+                    QueryIcon="Find">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <prism:InvokeCommandAction Command="{Binding SearchTextChangedCommand}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="QuerySubmitted">
+                            <prism:InvokeCommandAction Command="{Binding QuerySubmittedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ui:AutoSuggestBox>
+                <ui:ListView  
+                    x:Name="HeroesListView"
+                    DockPanel.Dock="Top"
+                    DisplayMemberPath="Name"
+                    SelectedItem="{Binding SelectedHeroe, Mode=TwoWay}"
+                    ItemsSource="{Binding Heroes}"
+                    />
+            </DockPanel>
+            <local:HeroView DataContext="{Binding ElementName=HeroesListView, Path=SelectedItem}"
+                Grid.Row="1"
+                Grid.Column="1"/>
+            <StatusBar Grid.Row="2" Grid.ColumnSpan="2"
+                x:Name="statusBar"
+                FlowDirection="RightToLeft"
+                VerticalAlignment="Bottom">
+                <StatusBarItem>
+                    <TextBlock Text="{Binding StatusMessage}"/>
+                </StatusBarItem>
+                
+                <Separator />
+                
+                <StatusBarItem>
+                    <ProgressBar
+                        Width="100"
+                        Height="20"
+                        x:Name="progressBar1" 
+                        IsIndeterminate="{Binding IsLoading}">
+                    </ProgressBar>
+                </StatusBarItem>
+                
+            </StatusBar>
+        </Grid>
+    </Grid>
+</Window>
