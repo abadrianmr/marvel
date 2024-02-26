@@ -38,32 +38,32 @@
                         <TextBlock
                         Text="Strength:"
                         Style="{StaticResource ComboBoxHeaderStyle}" />
-                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Strength}"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Strength, Mode=OneWay}"/>
 
                         <TextBlock
                         Text="Intelligence:"
                         Style="{StaticResource ComboBoxHeaderStyle}" />
-                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Intelligence}"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Intelligence, Mode=OneWay}"/>
 
                         <TextBlock
                         Text="Speed:"
                         Style="{StaticResource ComboBoxHeaderStyle}" />
-                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Speed}"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Speed, Mode=OneWay}"/>
 
                         <TextBlock
                         Text="Durability:"
                         Style="{StaticResource ComboBoxHeaderStyle}" />
-                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Durability}"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Durability, Mode=OneWay}"/>
+
+                        <TextBlock
+                        Text="Power:"
+                        Style="{StaticResource ComboBoxHeaderStyle}" />
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Power, Mode=OneWay}"/>
 
                         <TextBlock
                         Text="Combat:"
                         Style="{StaticResource ComboBoxHeaderStyle}" />
-                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Power}"/>
-
-                        <TextBlock
-                        Text="Combat:"
-                        Style="{StaticResource ComboBoxHeaderStyle}" />
-                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Combat}"/>
+                        <TextBox IsReadOnly="True" Text="{Binding PowerStats.Combat, Mode=OneWay}"/>
                     </StackPanel>
                 </GroupBox>
             </ui:SimpleStackPanel>

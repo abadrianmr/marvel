@@ -10,11 +10,11 @@ namespace VisualApp.ViewModels.Navigation
 
         public Image Image => CurrentEntity.Image;
 
-        public PowerStats PowerStats => CurrentEntity.PowerStats;
+        public PowerStatsViewModel PowerStats { get; }
 
         public HeroViewModel( Hero hero ) : base( hero )
         {
-
+            PowerStats = new PowerStatsViewModel( CurrentEntity.PowerStats );
         }
     }
 }
